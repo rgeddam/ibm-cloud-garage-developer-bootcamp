@@ -46,5 +46,7 @@ describe.only('the prime factors canary spec', () => {
     primeFactorsOf(9).should.deepEqual([3, 3]);
   });
 
-  //2, 2 , 2 ,2, 2, 3, 3, 7
+  it('returns [2, 2, 2, 2, 2, 3, 3, 7] for 2016', () => {
+      primeFactorsOf(2016).should.deepEqual([2, 2, 2, 2, 2, 3, 3, 7]);
+    });
 });
