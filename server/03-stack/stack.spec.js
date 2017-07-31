@@ -25,7 +25,7 @@ const makeStack = (maxSize) => {
   };
 };
 
-describe.only('the stack spec', () => {
+describe('the stack spec', () => {
 
   let stack;
 
