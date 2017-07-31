@@ -1,13 +1,14 @@
 
-const makeStack = () => {
+const makeStack = (maxSize) => {
 
   let stackValues = [];
+  if (maxSize < 1) throw new Error('Stack Size cannot be < 1');
 
   const isEmpty = () => stackValues.length === 0;
   const size = () => stackValues.length;
 
   const push = (value) => {
-    if (stackValues.length === 3) throw new Error('Cannot exceed 3');
+    if (stackValues.length === maxSize) throw new Error('Cannot exceed 3');
     stackValues.push(value);
   };
 
@@ -64,6 +65,7 @@ describe.only('the stack spec', () => {
   });
 
   it('overflows', () => {
+    stack = makeStack(3);
     stack.push();
     stack.push();
     stack.push();
@@ -96,6 +98,9 @@ describe.only('the stack spec', () => {
     stack.pop().should.be.equal('x');
   });
   it('accepts only positive capacity', () => {
-
+    const pushPositiveValues = () => {
+      stack = makeStack(0);
+    };
+    pushPositiveValues.should.throw('Stack Size cannot be < 1');
   });
 });
