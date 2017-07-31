@@ -13,7 +13,14 @@
 //
 // let stack = makeStack();
 
+let stack = {
+  isEmpty: () => true
+};
+
 describe.only('the stack spec', () => {
+  it('starts empty',() => {
+    stack.isEmpty().should.be.true();
+  });
   // beforeEach(() => {
   //   stack = makeStack();
   // });
