@@ -90,6 +90,7 @@ describe.only('the stack spec', () => {
 
     stack.pop().should.be.equal('a');
   });
+
   it('pops the same two pushed', () => {
     stack.push('x');
     stack.push('y');
@@ -97,6 +98,7 @@ describe.only('the stack spec', () => {
     stack.pop().should.be.equal('y');
     stack.pop().should.be.equal('x');
   });
+
   it('accepts only positive capacity', () => {
     const pushPositiveValues = () => {
       stack = makeStack(0);
