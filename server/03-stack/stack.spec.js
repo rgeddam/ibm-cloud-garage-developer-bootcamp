@@ -1,11 +1,20 @@
 
 const makeStack = () => {
-  let stackSize = 0;
 
-  const isEmpty = () => stackSize === 0;
-  const push = () => stackSize++;
-  const pop = () => stackSize--;
-  const size = () => stackSize;
+  let stackValues = [];
+
+  const isEmpty = () => stackValues.length === 0;
+  const size = () => stackValues.length;
+
+  const push = (value) => {
+    if (stackValues.length === 3) throw new Error('Cannot exceed 3');
+    stackValues.push(value);
+  };
+
+  const pop = () => {
+    if (stackValues.length === 0) throw new Error('Cannot be -1');
+    return stackValues.pop();
+  };
 
   return {
     isEmpty,
@@ -33,7 +42,6 @@ describe.only('the stack spec', () => {
 
   it('is not be empty when pushed', () => {
     stack.push();
-    console.log('Stack size is ' + stack.size());
     stack.isEmpty().should.be.false();
   });
 
@@ -52,13 +60,42 @@ describe.only('the stack spec', () => {
   it('leaves stack size 0 when pushed and popped', () => {
     stack.push();
     stack.pop();
-    console.log('leaves stack size 0 when pushed and popped ' + stack.size());
-    stack.size().should.equal(0);
+    stack.size().should.be.equal(0);
   });
 
-  it('overflows');
-  it('under-flows');
-  it('pops the same one pushed');
-  it('pops the same two pushed');
-  it('accepts only positive capacity');
+  it('overflows', () => {
+    stack.push();
+    stack.push();
+    stack.push();
+    const overFlowStack = () => {
+      stack.push();
+    };
+    overFlowStack.should.throw('Cannot exceed 3');
+  });
+
+  it('under-flows', () => {
+    stack.push();
+    stack.pop();
+
+    const underFlowStack = () => {
+      stack.pop();
+    };
+    underFlowStack.should.throw('Cannot be -1');
+  });
+
+  it('pops the same one pushed', () => {
+    stack.push('a');
+
+    stack.pop().should.be.equal('a');
+  });
+  it('pops the same two pushed', () => {
+    stack.push('x');
+    stack.push('y');
+
+    stack.pop().should.be.equal('y');
+    stack.pop().should.be.equal('x');
+  });
+  it('accepts only positive capacity', () => {
+
+  });
 });
